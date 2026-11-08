@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="On-demand grid applications, STC packs and solar design for Queensland electricians. Pay per job.">
+<title>Pocket Backup</title>
+<meta property="og:title" content="Pocket Backup | Solar paperwork for QLD electricians">
+<meta property="og:description" content="Grid applications, STC packs and SAA-accredited solar design for Queensland electricians. Pay per job, first job free.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#18202a">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single column landing; switchboard-panel motif (labelled circuits) for services; free checker as the interactive centrepiece. */
+:root{
+  --bg:#f4f5f2; --panel:#ffffff; --ink:#18202a; --muted:#56606c; --line:#d9ddd6;
+  --accent:#e3a21a; --accent-ink:#18202a; --band:#18202a; --band-ink:#eef0ec; --band-muted:#a9b2bc;
+  --ok:#2f8a4f; --ok-bg:#e4f2e8; --bad:#b9382f; --bad-bg:#f8e2df;
+  --f-display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12161b; --panel:#1a2027; --ink:#e8ebee; --muted:#9ba4ae; --line:#2b333c;
+  --accent:#f0b43a; --accent-ink:#12161b; --band:#0c0f13; --band-ink:#eef0ec; --band-muted:#9aa3ad;
+  --ok:#5cc07f; --ok-bg:#1c3325; --bad:#f07068; --bad-bg:#3b1f1d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161b; --panel:#1a2027; --ink:#e8ebee; --muted:#9ba4ae; --line:#2b333c;
+  --accent:#f0b43a; --accent-ink:#12161b; --band:#0c0f13; --band-ink:#eef0ec; --band-muted:#9aa3ad;
+  --ok:#5cc07f; --ok-bg:#1c3325; --bad:#f07068; --bad-bg:#3b1f1d; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6}
+.in{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:64px}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(38px,6vw,64px);font-weight:700}
+h2{font-size:clamp(28px,4vw,40px)}
+h3{font-size:22px}
+p{margin:0;max-width:62ch}
+.eyebrow{font-family:var(--f-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stack{display:grid;gap:16px}
+a{color:inherit}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 16px var(--f-body);border-radius:6px;padding:12px 20px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;text-decoration:none}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* top */
+.top{background:var(--band);color:var(--band-ink)}
+.top .bar{display:flex;align-items:center;gap:16px;padding-block:16px;flex-wrap:wrap}
+.brand{font-family:var(--f-display);font-weight:700;font-size:22px;display:flex;gap:10px;align-items:center}
+.bolt{width:22px;height:22px;background:var(--accent);clip-path:polygon(55% 0,10% 58%,45% 58%,35% 100%,90% 40%,55% 40%)}
+.top nav{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap;font-size:15px}
+.top nav a{color:var(--band-muted);text-decoration:none} .top nav a:hover{color:var(--band-ink)}
+.hero{padding-block:56px 72px;display:grid;gap:24px}
+.hero p{color:var(--band-muted);font-size:19px}
+.hero .row{display:flex;gap:12px;flex-wrap:wrap}
+.hero .btn:not(.primary){background:transparent;color:var(--band-ink);border-color:#3a4552}
+.creds{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--f-mono);font-size:13px;color:var(--band-muted)}
+.creds span::before{content:"■ ";color:var(--accent)}
+
+/* switchboard services */
+.board{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--panel)}
+.cb{padding:20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:8px;align-content:start}
+.cb .lbl{font-family:var(--f-mono);font-size:12px;color:var(--muted);display:flex;justify-content:space-between}
+.cb .price{font-family:var(--f-display);font-size:30px;font-weight:600;font-variant-numeric:tabular-nums}
+.cb .price small{font-size:15px;color:var(--muted);font-family:var(--f-body);font-weight:400}
+.cb p{font-size:15px;color:var(--muted)}
+.note{font-size:14px;color:var(--muted)}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.plan{border:1px solid var(--line);border-radius:8px;padding:18px;background:var(--panel);display:grid;gap:4px}
+.plan .price{font-family:var(--f-display);font-size:28px;font-weight:600}
+.plan.free{border-color:var(--accent);border-width:2px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;counter-reset:s}
+.step{display:grid;gap:6px;counter-increment:s}
+.step::before{content:counter(s);font-family:var(--f-display);font-weight:700;font-size:20px;width:36px;height:36px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+.step p{font-size:15px;color:var(--muted)}
+
+/* checker */
+.checker{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+@media (max-width:760px){.checker{grid-template-columns:1fr}}
+.qs{display:grid;gap:14px}
+.q{display:grid;gap:6px;font-size:15px}
+.q > span{font-weight:600}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opts label{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:5px 10px;cursor:pointer;font-size:14px}
+.opts input{accent-color:var(--accent)}
+.opts label:has(input:checked){border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.result{display:grid;gap:10px;align-content:start}
+.meter{height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--ok);transition:width .3s}
+.items{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:15px}
+.items li{display:flex;gap:8px;align-items:flex-start}
+.items li b{font-family:var(--f-mono);font-size:12px;padding:1px 6px;border-radius:4px;flex:none;margin-top:3px}
+.items li.ok b{background:var(--ok-bg);color:var(--ok)} .items li.no b{background:var(--bad-bg);color:var(--bad)}
+.verdict{font-family:var(--f-display);font-size:22px;font-weight:600}
+
+/* why */
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.why div{display:grid;gap:6px;border-top:3px solid var(--accent);padding-top:12px}
+.why p{font-size:15px;color:var(--muted)}
+
+/* contact */
+.contact{background:var(--band);color:var(--band-ink)}
+.contact p{color:var(--band-muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.cc{border:1px solid #34404c;border-radius:8px;padding:16px;display:grid;gap:8px}
+.cc .v{font-family:var(--f-mono);font-size:17px;color:var(--band-ink);word-break:break-all}
+.cc button{justify-self:start;font:600 14px var(--f-body);background:var(--accent);color:var(--accent-ink);border:0;border-radius:5px;padding:6px 12px;cursor:pointer}
+.form{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));border:1px solid #34404c;border-radius:8px;padding:20px}
+.form label{display:grid;gap:6px;font-size:14px;color:var(--band-muted)}
+.form .wide{grid-column:1/-1}
+.form input,.form select,.form textarea{font:16px var(--f-body);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px;width:100%}
+.form textarea{min-height:96px;resize:vertical}
+.form .hp{display:none}
+footer{background:var(--band);color:var(--band-muted);font-size:13px;padding-block:20px 32px;border-top:1px solid #2a333d}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="in bar">
+    <div class="brand"><span class="bolt" aria-hidden="true"></span>Pocket Backup</div>
+    <nav><a href="#services">Services</a><a href="#check">Free job check</a><a href="#why">Why me</a><a href="#contact">Contact</a></nav>
+  </div>
+  <div class="in hero">
+    <span class="eyebrow" style="color:var(--band-muted)">Queensland · Energex &amp; Ergon</span>
+    <h1>You install.<br>I handle the paperwork until you're paid.</h1>
+    <p>Grid applications, STC packs and system design for Queensland electricians, done by an accredited solar designer. No lock-in contracts. Pay per job.</p>
+    <div class="row"><a class="btn primary" href="#contact">Book a free 15-min call</a><a class="btn" href="#check">Check a job now</a></div>
+    <div class="creds"><span>SAA accredited PV designer</span><span>7+ years in Queensland solar</span><span>PMP certified</span><span>Based in South East Queensland</span></div>
+  </div>
+</div>
+
+<section id="services"><div class="in stack" style="gap:28px">
+  <div class="stack"><span class="eyebrow">Services</span><h2>Pick the circuits you need</h2><p>Each job starts when your job pack is complete. Prices are per job, no GST charged.</p></div>
+  <div class="board">
+    <div class="cb"><span class="lbl"><span>CB1</span><span>GRID</span></span><h3>Grid connection application</h3><div class="price">A$80 <small>/ job</small></div><p>Pre-approval and connection lodged in the Energex or Ergon portal, approval tracked, meter request followed up.</p></div>
+    <div class="cb"><span class="lbl"><span>CB2</span><span>STC</span></span><h3>STC compliance pack</h3><div class="price">A$80 <small>/ job</small></div><p>Photos, serials and documents checked against the approved product list, then set up with your STC agent.</p></div>
+    <div class="cb"><span class="lbl"><span>CB3</span><span>BUNDLE</span></span><h3>Grid + STC together</h3><div class="price">A$140 <small>/ job</small></div><p>The full post-install run, from application to approval and STC lodgement.</p></div>
+    <div class="cb"><span class="lbl"><span>CB4</span><span>DESIGN</span></span><h3>System design + proposal</h3><div class="price">A$220 <small>/ job</small></div><p>Solar and battery design by an SAA accredited designer, with a customer-ready proposal.</p></div>
+  </div>
+  <div class="stack" style="gap:12px"><h3>Monthly plans for regular work</h3>
+  <div class="plans">
+    <div class="plan free"><span class="eyebrow">Trial</span><div class="price">First job free</div><span class="note">See the turnaround before you pay.</span></div>
+    <div class="plan"><span class="eyebrow">Up to 5 jobs</span><div class="price">A$400<small class="note"> / month</small></div></div>
+    <div class="plan"><span class="eyebrow">Up to 12 jobs</span><div class="price">A$800<small class="note"> / month</small></div></div>
+    <div class="plan"><span class="eyebrow">Up to 25 jobs</span><div class="price">A$1,500<small class="note"> / month</small></div></div>
+  </div>
+  <p class="note">Monthly plans include grid + STC paperwork and a weekly money report. Extra jobs A$70 each. Chasing missing info after the job pack is sent: A$40 per follow-up.</p></div>
+</div></section>
+
+<section style="padding-top:0"><div class="in stack" style="gap:28px">
+  <div class="stack"><span class="eyebrow">How it works</span><h2>From install to cash in your account</h2></div>
+  <div class="steps">
+    <div class="step"><h3>Send the job pack</h3><p>Power bill, photos, serials and system details on one fixed checklist. Phone photos are fine.</p></div>
+    <div class="step"><h3>I check and lodge</h3><p>Everything is checked for gaps first, then lodged with Energex or Ergon and your STC agent.</p></div>
+    <div class="step"><h3>Weekly money report</h3><p>Every Monday: jobs not invoiced, overdue customers, and anything stuck waiting on approval.</p></div>
+    <div class="step"><h3>You get paid</h3><p>All payments go straight to you. I only invoice for my own service.</p></div>
+  </div>
+</div></section>
+
+<section id="check" style="padding-top:0"><div class="in stack" style="gap:24px">
+  <div class="stack"><span class="eyebrow">Free tool</span><h2>Is this job ready to lodge?</h2><p>Tick what you have for a Queensland job. You'll see what's missing before it holds up your approval or your STCs.</p></div>
+  <div class="checker">
+    <div class="qs" id="qs">
+      <div class="q"><span>Network</span><div class="opts"><label><input type="radio" name="net" id="net-ex" value="Energex" checked>Energex</label><label><input type="radio" name="net" id="net-er" value="Ergon">Ergon</label></div></div>
+      <div class="q"><span>Job type</span><div class="opts"><label><input type="radio" name="type" id="t-pv" value="pv" checked>Solar</label><label><input type="radio" name="type" id="t-bat" value="bat">Battery</label><label><input type="radio" name="type" id="t-both" value="both">Solar + battery</label></div></div>
+      <div class="q"><span>What you have now</span><div class="opts" id="docs"></div></div>
+    </div>
+    <div class="result" aria-live="polite">
+      <div class="verdict" id="verdict"></div>
+      <div class="meter"><i id="bar" style="width:0"></i></div>
+      <ul class="items" id="items"></ul>
+      <p class="note" id="tail"></p>
+      <a class="btn primary" href="#contact" style="justify-self:start">Send it to me instead</a>
+    </div>
+  </div>
+  <p class="note">This is a document checklist only. Export limits and approval rules change; I confirm them against current Energex/Ergon requirements for every job.</p>
+</div></section>
+
+<section id="why" style="padding-top:0"><div class="in stack" style="gap:28px">
+  <div class="stack"><span class="eyebrow">Why me</span><h2>Local, accredited, and on your side</h2></div>
+  <div class="why">
+    <div><h3>An accredited designer</h3><p>I hold SAA Grid-Connect PV design accreditation, so design questions are answered properly, not passed back to you.</p></div>
+    <div><h3>Queensland only</h3><p>Energex and Ergon processes every day. Not an offshore team learning your network on your jobs.</p></div>
+    <div><h3>No brand strings</h3><p>Buy your gear from any wholesaler. I don't sell hardware and I don't take a cut of your STCs.</p></div>
+    <div><h3>Your data stays yours</h3><p>I work in your accounts with limited access, never change bank details, and hand everything back if we stop.</p></div>
+  </div>
+</div></section>
+
+<section id="contact" class="contact"><div class="in stack" style="gap:24px">
+  <div class="stack"><span class="eyebrow" style="color:var(--band-muted)">Contact</span><h2>Book a free 15-minute discovery call</h2><p>We'll look at how many jobs you do a month, where paperwork holds you up, and whether a per-job or monthly plan suits you. No obligation, and your first job is free.</p></div>
+  <div class="steps" style="color:var(--band-ink)">
+    <div class="step"><h3>Your current workflow</h3><p style="color:var(--band-muted)">Who lodges grid and STC paperwork now, and how long it takes.</p></div>
+    <div class="step"><h3>Where money gets stuck</h3><p style="color:var(--band-muted)">Unbilled jobs, slow approvals, rejected STCs.</p></div>
+    <div class="step"><h3>A fixed price</h3><p style="color:var(--band-muted)">You leave the call with a clear price for your volume.</p></div>
+  </div>
+  <div class="cards">
+    <div class="cc" id="book-card" hidden><span class="eyebrow" style="color:var(--band-muted)">Book a call online</span><a class="v" id="c-book" href="https://calendly.com/" target="_blank" rel="noopener">Pick a time →</a></div>
+    <div class="cc"><span class="eyebrow" style="color:var(--band-muted)">Phone / text</span><a class="v" id="c-phone" href="tel:04XXXXXXXX">04XX XXX XXX</a><button data-copy="c-phone">Copy</button></div>
+    <div class="cc"><span class="eyebrow" style="color:var(--band-muted)">Email</span><a class="v" id="c-email" href="mailto:hello@yourdomain.com.au">hello@yourdomain.com.au</a><button data-copy="c-email">Copy</button></div>
+  </div>
+  <form class="form" name="contact" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="company-website">
+    <input type="hidden" name="form-name" value="contact">
+    <p class="hp"><label>Leave empty <input name="company-website"></label></p>
+    <div class="wide"><h3>Or leave your details and I'll call you back</h3></div>
+    <label>Your name<input name="name" autocomplete="name" required></label>
+    <label>Business name<input name="business" autocomplete="organization"></label>
+    <label>Mobile<input name="phone" type="tel" autocomplete="tel" required></label>
+    <label>Email<input name="email" type="email" autocomplete="email"></label>
+    <label>Network<select name="network"><option>Energex</option><option>Ergon</option><option>Both</option></select></label>
+    <label>Solar / battery jobs per month<select name="volume"><option>1–4</option><option>5–12</option><option>13–25</option><option>25+</option></select></label>
+    <label class="wide">What do you need help with?<textarea name="message" placeholder="e.g. grid applications for 6 jobs a month, STC packs, a battery design"></textarea></label>
+    <div class="wide"><button class="btn primary" type="submit">Send — I reply within 1 business day</button></div>
+  </form>
+</div></section>
+<footer><div class="in">Pocket Backup · ABN XX XXX XXX XXX · SAA accreditation no. XXXXXX · South East Queensland</div></footer>
+
+<script>
+(function(){
+const BASE=[
+ ["bill","Recent power bill (NMI, meter no., retailer)"],
+ ["addr","Customer name, address and contact"],
+ ["sld","Single line diagram / system design"],
+ ["models","Panel, inverter and battery models"],
+ ["approved","Models checked on the approved product list"],
+ ["sb","Switchboard and meter photos"],
+ ["lic","Electrician licence and SAA installer number"]];
+const POST=[["serials","Serial numbers (photo or app scan)"],["install","Installation photos"],["coc","Certificate of testing and compliance"]];
+const BAT=[["batt","Battery install photos and backup circuit details"]];
+let have={};
+function list(){const t=document.querySelector('input[name=type]:checked').value;return BASE.concat(POST,t==="pv"?[]:BAT)}
+function drawOpts(){
+  const box=document.getElementById("docs");
+  box.innerHTML=list().map(([k,l])=>`<label><input type="checkbox" id="d-${k}" data-k="${k}"${have[k]?" checked":""}>${l}</label>`).join("");
+}
+function update(){
+  const L=list(),net=document.querySelector('input[name=net]:checked').value;
+  const miss=L.filter(([k])=>!have[k]),done=L.length-miss.length;
+  document.getElementById("bar").style.width=(done/L.length*100)+"%";
+  document.getElementById("verdict").textContent=miss.length?`${miss.length} item${miss.length>1?"s":""} missing`:`Ready to lodge with ${net}`;
+  document.getElementById("items").innerHTML=L.map(([k,l])=>`<li class="${have[k]?"ok":"no"}"><b>${have[k]?"OK":"NEED"}</b><span>${l}</span></li>`).join("");
+  document.getElementById("tail").textContent=miss.length?"Jobs usually stall here: approvals wait on missing details and STCs get rejected for serial or product mismatches.":"Lodge it, or send it to me and I'll do it today.";
+}
+document.addEventListener("change",e=>{
+  if(e.target.dataset.k){have[e.target.dataset.k]=e.target.checked;update()}
+  if(e.target.name==="type"){drawOpts();update()}
+  if(e.target.name==="net")update();
+});
+document.addEventListener("click",async e=>{
+  const b=e.target.closest("[data-copy]");if(!b)return;
+  const el=document.getElementById(b.dataset.copy);
+  try{await navigator.clipboard.writeText(el.textContent);b.textContent="Copied"}catch(x){const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected"}
+  setTimeout(()=>b.textContent="Copy",1800);
+});
+have={bill:true,addr:true,models:true,sb:true};
+drawOpts();update();
+})();
+</script>
+</body>
+</html>
