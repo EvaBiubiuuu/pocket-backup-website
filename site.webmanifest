@@ -1,0 +1,12 @@
+{
+  "name": "Pocket Backup",
+  "short_name": "Pocket Backup",
+  "icons": [
+    {"src": "/brand/app-icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/brand/app-icon-512.png", "sizes": "512x512", "type": "image/png"}
+  ],
+  "theme_color": "#1d2440",
+  "background_color": "#ffffff",
+  "display": "browser",
+  "start_url": "/"
+}
