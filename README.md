@@ -7,4 +7,4 @@ Static site for Pocket Backup (on-demand admin for small businesses, starting wi
 - `fonts/` self-hosted Barlow and IBM Plex Mono (SIL Open Font License)
 - `netlify.toml` security and cache headers
 
-Still to add when available (search for `TODO(Eva)`): business mobile, ABN, SAA accreditation number.
+Still to add when available (search for `TODO(Eva)`): ABN, SAA accreditation number. (No public phone number by choice: the form asks for the customer's number and we call back.)

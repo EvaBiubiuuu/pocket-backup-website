@@ -471,23 +471,18 @@ footer{background:var(--band);color:var(--band-muted);font-size:13px;padding-blo
   </div>
   <div class="cards">
     <div class="cc book" id="book-card"><span class="eyebrow">Book online</span><a class="v" id="c-book" href="https://calendly.com/qld-pocketbackup/30min" target="_blank" rel="noopener">Pick a time →<span class="sr"> (opens Calendly in a new tab)</span></a></div>
-    <!-- TODO(Eva): add the business mobile, then restore this card:
-    <div class="cc"><span class="eyebrow">Phone / text</span><a class="v" id="c-phone" href="tel:04XXXXXXXX">04XX XXX XXX</a><button type="button" data-copy="c-phone">Copy</button></div>
-    -->
     <div class="cc"><span class="eyebrow">Email</span><a class="v" id="c-email" href="mailto:qld.pocketbackup@gmail.com">qld.pocketbackup@gmail.com</a><button type="button" data-copy="c-email" aria-label="Copy email address">Copy</button></div>
   </div>
   <form class="form" name="contact" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="company-website">
     <input type="hidden" name="form-name" value="contact">
     <p class="hp"><label>Leave empty <input name="company-website"></label></p>
-    <div class="wide"><h3>Or leave your details and we'll call you back</h3></div>
+    <div class="wide"><h3>Leave your number and we'll call you back</h3></div>
     <label>Your name<input name="name" autocomplete="name" required></label>
-    <label>Business name (optional)<input name="business" autocomplete="organization"></label>
     <label>Mobile<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
     <label>Email (optional)<input name="email" type="email" autocomplete="email"></label>
-    <label>Network<select name="network"><option>Energex</option><option>Ergon</option><option>Both</option></select></label>
-    <label>Solar / battery jobs per month<select name="volume"><option>1–4</option><option>5–12</option><option>13–25</option><option>25+</option></select></label>
-    <label class="wide">Where does admin hold you up most?<textarea name="message" placeholder="e.g. grid applications for 6 jobs a month, invoices going out late, customers paying slowly"></textarea></label>
-    <div class="wide stack" style="gap:10px"><button class="btn primary" type="submit" style="justify-self:start">Send. We reply within 1 business day</button><p class="note" style="color:var(--band-muted)">We only use these details to reply to you. See the <a href="/privacy.html">privacy policy</a>.</p></div>
+    <label>Best time to call<select name="best-time"><option>Any time</option><option>Morning (before 10am)</option><option>Lunchtime</option><option>Afternoon</option><option>After 5pm</option></select></label>
+    <label class="wide">Anything we should know? (optional)<textarea name="message" rows="3" placeholder="e.g. 6 solar jobs a month, invoices going out late"></textarea></label>
+    <div class="wide stack" style="gap:10px"><button class="btn primary" type="submit" style="justify-self:start">Send. We'll call you within 1 business day</button><p class="note" style="color:var(--band-muted)">We only use these details to reply to you. See the <a href="/privacy.html">privacy policy</a>.</p></div>
   </form>
 </div></section>
 </main>
